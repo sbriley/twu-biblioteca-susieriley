@@ -3,7 +3,7 @@ package com.twu.biblioteca;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.fail;
+import static junit.framework.TestCase.assertTrue;
 
 public class BookTest {
     @Test
@@ -17,17 +17,18 @@ public class BookTest {
     @Test
     public void checkoutTest() {
         Book book = new Book("Call Me By Your Name", "Andre Aciman", 2007);
-        assertEquals(book.status(), Book.Status.AVAILABLE);
-        book.checkoutBook();
-        assertEquals(book.status(), Book.Status.CHECKED_OUT);
+        assertTrue(book.isAvailable());
+        book.checkoutItem();
+        assertTrue(book.isCheckedOut());
     }
 
     @Test
     public void returnTest() {
         Book book = new Book("Call Me By Your Name", "Andre Aciman", 2007);
-        book.checkoutBook();
-        book.returnBook();
-        assertEquals(book.status(), Book.Status.AVAILABLE);
+        book.checkoutItem();
+        assertTrue(book.isCheckedOut());
+        book.returnItem();
+        assertTrue(book.isAvailable());
     }
 
 

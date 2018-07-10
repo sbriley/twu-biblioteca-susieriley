@@ -27,12 +27,12 @@ public class ConsoleUI {
             case "Return Book":
                 System.out.println("What is the name of the book you would like to return?");
                 title = scanner.nextLine();
-                return lib.returnBook(title);
+                return lib.returnItem(title);
 
             case "Checkout Book":
                 System.out.println("What is the name of the book you would like to checkout?");
                 title = scanner.nextLine();
-                return lib.checkoutBook(title);
+                return lib.checkoutItem(title);
         }
         return INVALID_OPTION;
     }

@@ -24,20 +24,20 @@ public class Library {
         return s;
     }
 
-    public String checkoutBook(String title) {
+    public String checkoutItem(String title) {
         for (Book book : books) {
             if(book.getTitle().equals(title) && book.isAvailable()) {
-                book.checkoutBook();
+                book.checkoutItem();
                 return "Thank you! Enjoy the book";
             }
         }
         return "That book is not available.";
     }
 
-    public String returnBook(String title) {
+    public String returnItem(String title) {
         for (Book book : books) {
             if (book.getTitle().equals(title) && book.isCheckedOut()) {
-                book.returnBook();
+                book.returnItem();
                 return "Thank you for returning the book.";
             }
         }

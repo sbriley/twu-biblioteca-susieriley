@@ -9,15 +9,15 @@ public class LibraryTest {
     @Test
     public void testCheckoutBook() {
         Library lib = new Library();
-        assertEquals(lib.checkoutBook("Call Me By Your Name"),"Thank you! Enjoy the book");
-        assertEquals(lib.checkoutBook("Call Me By Your Name"),"That book is not available.");
+        assertEquals(lib.checkoutItem("Call Me By Your Name"),"Thank you! Enjoy the book");
+        assertEquals(lib.checkoutItem("Call Me By Your Name"),"That book is not available.");
     }
 
     @Test
     public void testReturnBook() {
         Library lib = new Library();
-        lib.checkoutBook("Call Me By Your Name");
-        assertEquals(lib.returnBook("Call Me By Your Name"),"Thank you for returning the book.");
-        assertEquals(lib.returnBook("The Bell Jar"),"That is not a valid book to return.");
+        lib.checkoutItem("Call Me By Your Name");
+        assertEquals(lib.returnItem("Call Me By Your Name"),"Thank you for returning the book.");
+        assertEquals(lib.returnItem("The Bell Jar"),"That is not a valid book to return.");
     }
 }
