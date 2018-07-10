@@ -4,19 +4,12 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 
+// not sure how to test functions that require user input
+
 public class UITest {
 
     private static final Boolean TEST = true;
 //    String[] menuOptions = {"List Books","Help"};
-
-    @Test
-    public void testStartupMessage() {
-        ConsoleUI ui = new ConsoleUI();
-        Library lib = new Library();
-
-        //TODO remove duplication but how?
-        assertEquals(ui.startupMessage(),"Welcome to the Bangalore Public Library!");
-    }
 
     @Test
     public void testListBooks() {
@@ -26,20 +19,13 @@ public class UITest {
                 new Book("A Tale for the Time Being","Ruth Ozeki",2013)});
 
 
-        //TODO: these tests are problematic to me, because if i add another book then the test will fail. But if I generalize the right side of the test, then I'll have duplicated code
+        // these tests are problematic to me, because if i add another book then the test will fail. But if I generalize the right side of the test, then I'll have duplicated code
         assertEquals(lib.listBooks(), "Call Me By Your Name\n" +
                 "  by Andre Aciman\n" +
-                "  published 2007\n\n" +
+                "  published 2007\n" +
                 "A Tale for the Time Being\n" +
                 "  by Ruth Ozeki\n" +
-                "  published 2013\n\n");
-    }
-
-    @Test
-    public void testInvalidResponse() {
-        ConsoleUI ui = new ConsoleUI();
-        Library lib = new Library();
-        assertEquals(ui.response("some Invalid Menu Item",lib),"Select a valid option!");
+                "  published 2013\n");
     }
 
     @Test
@@ -47,10 +33,11 @@ public class UITest {
         ConsoleUI ui = new ConsoleUI();
         Library lib = new Library();
         String response = ui.response("List Books",lib);
-        assertEquals(ui.println(response,TEST),ui.listBooks(lib));
+        assertEquals(ConsoleUI.println(response,TEST),lib.listBooks());
     }
 
-    // I realize this test is bad because if I were to add a new menu option it would not pass
+    // is this test useful? it basically repeats the code in ui.menuOptions() - but how else do you test things
+    // that just print?
     @Test
     public void testDisplayOptions() {
         ConsoleUI ui = new ConsoleUI();
@@ -58,7 +45,14 @@ public class UITest {
         for (String menuLabel : ConsoleUI.menuLabels) {
             result += menuLabel+ "\n";
         }
-        assertEquals(ui.println(ui.listOptions(),TEST),result);
+        assertEquals(ui.println(ui.menuOptions(),TEST),result);
+    }
+
+    @Test
+    public void testInvalidOptionCase() {
+        ConsoleUI ui = new ConsoleUI();
+        Library lib = new Library();
+        assertEquals(ui.response("Books",lib),ConsoleUI.INVALID_OPTION);
     }
 
 }

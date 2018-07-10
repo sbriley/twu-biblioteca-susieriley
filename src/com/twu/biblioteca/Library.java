@@ -3,30 +3,26 @@ package com.twu.biblioteca;
 public class Library {
     private Book[] books;
 
-
     public Library() {
-        books = new Book[]{
+        this.books = new Book[]{
                 new Book("Call Me By Your Name", "Andre Aciman", 2007),
-                new Book("A Tale for the Time Being","Ruth Ozeki",2013)};
+                new Book("A Tale for the Time Being","Ruth Ozeki",2013),
+                new Book("Happiness: A Very Short Introduction","Daniel M. Haybron",2013),
+                new Book("Catch-22","Joseph Heller",1961)
+        };
     }
 
-    // This pretty much exists only for testing - is that okay?
     public Library(Book[] books) {
         this.books = books;
-    }
-
-    public Book[] getBooks() {
-        return this.books;
     }
 
     public String listBooks() {
         String s = "";
         for (Book book : books) {
-            s += book.detailsString() + "\n\n";
+            s += book.detailsString() + "\n";
         }
         return s;
     }
-
 
     public String checkoutBook(String title) {
         for (Book book : books) {

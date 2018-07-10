@@ -39,8 +39,6 @@ class Book {
     public void checkoutBook() {
         if(this.status.equals(Status.AVAILABLE)) {
             this.status = Status.CHECKED_OUT;
-//        } else {
-//            throw new BookAvailabilityException(this.title + " is unavailable for checkout");
         }
     }
 

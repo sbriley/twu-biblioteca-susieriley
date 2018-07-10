@@ -18,15 +18,17 @@ public class BibliotecaApp {
 
     // I don't know how to test this!!!
     public void runApplication() {
+        Scanner scanner = new Scanner(System.in);
         ui.displayStartupMessage();
+
         while(true) {
-            Scanner scanner = new Scanner(System.in);
-            String userInput = scanner.nextLine();
+            String userInput = scanner.next();
             if (userInput.equals("Quit")) {
                 break;
             } else {
                 this.ui.respond(userInput,this.lib);
             }
         }
+
     }
 }
