@@ -32,7 +32,8 @@ public class UITest {
     public void testListBooksResponse() {
         ConsoleUI ui = new ConsoleUI();
         Library lib = new Library();
-        String response = ui.response("List Books",lib);
+        User user = new User(1234567);
+        String response = ui.response("List Books",lib,user);
         assertEquals(ConsoleUI.println(response,TEST),lib.listBooks());
     }
 
@@ -52,7 +53,21 @@ public class UITest {
     public void testInvalidOptionCase() {
         ConsoleUI ui = new ConsoleUI();
         Library lib = new Library();
-        assertEquals(ui.response("Books",lib),ConsoleUI.INVALID_OPTION);
+        User user = new  User(1234567);
+        assertEquals(ui.response("Books",lib,user),ConsoleUI.INVALID_OPTION);
+    }
+
+    @Test
+    public void testOnlyShowAvailableItems() {
+        ConsoleUI ui = new ConsoleUI();
+        User user = new User(1234567);
+        Library lib = new Library(new Book[]{
+                new Book("Call Me By Your Name", "Andre Aciman", 2007),
+                new Book("A Tale for the Time Being","Ruth Ozeki",2013)});
+        assertEquals(lib.listBooks(),new Book("Call Me By Your Name", "Andre Aciman", 2007).detailsString() +
+                "\n" + new Book("A Tale for the Time Being","Ruth Ozeki",2013).detailsString() + "\n");
+        lib.checkoutItem("Call Me By Your Name", user);
+        assertEquals(lib.listBooks(),new Book("A Tale for the Time Being","Ruth Ozeki",2013).detailsString() + "\n");
     }
 
 }

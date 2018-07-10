@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import java.io.PrintStream;
 import java.util.Scanner;
 
 public class ConsoleUI {
@@ -16,7 +15,7 @@ public class ConsoleUI {
         return message;
     }
 
-    public String response(String userInput, Library lib) {
+    public String response(String userInput, Library lib, User user) {
         Scanner scanner = new Scanner(System.in);
         String title;
 
@@ -27,12 +26,12 @@ public class ConsoleUI {
             case "Return Book":
                 System.out.println("What is the name of the book you would like to return?");
                 title = scanner.nextLine();
-                return lib.returnItem(title);
+                return lib.returnItem(title, user);
 
             case "Checkout Book":
                 System.out.println("What is the name of the book you would like to checkout?");
                 title = scanner.nextLine();
-                return lib.checkoutItem(title);
+                return lib.checkoutItem(title, user);
         }
         return INVALID_OPTION;
     }
@@ -55,7 +54,7 @@ public class ConsoleUI {
         System.out.println(this.startupMessage());
     }
 
-    public void respond(String userInput, Library lib) {
-        System.out.println(this.response(userInput,lib));
+    public void respond(String userInput, Library lib, User user) {
+        System.out.println(this.response(userInput,lib,user));
     }
 }

@@ -4,10 +4,6 @@ import java.util.Arrays;
 
 class Book extends Media {
 
-    public enum Status {
-        CHECKED_OUT, AVAILABLE
-    }
-
     String author;
     int year;
 
@@ -15,7 +11,7 @@ class Book extends Media {
         this.title = title;
         this.author = author;
         this.year = year;
-        this.status = Media.Status.AVAILABLE;
+        this.mediaType = Media.BOOK;
     }
 
     public String detailsString() {

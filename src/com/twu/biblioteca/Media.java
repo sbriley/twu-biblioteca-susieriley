@@ -1,22 +1,22 @@
 package com.twu.biblioteca;
 
 public abstract class Media {
-    public enum Status {
-        AVAILABLE,
-        CHECKED_OUT
-    }
 
-    protected Status status;
+    public static final String MOVIE = "movie";
+    public static final String BOOK = "book";
+
     protected String title;
+    protected String mediaType;
+    protected User user;
 
     abstract String detailsString();
 
     public Media() {
-        this.status = Status.AVAILABLE;
+        this.user = new NullUser();
     }
 
-    public Media.Status status() {
-        return this.status;
+    public User getUser() {
+        return user;
     }
 
     public String getTitle() {
@@ -24,22 +24,23 @@ public abstract class Media {
     }
 
     public boolean isAvailable() {
-        return status.equals(Media.Status.AVAILABLE);
+        return user.equals(new NullUser());
     }
 
     public boolean isCheckedOut() {
-        return status.equals(Media.Status.CHECKED_OUT);
+        return !user.equals(new NullUser());
     }
 
-    public void checkoutItem() {
-        if (this.status.equals(Status.AVAILABLE)) {
-            this.status = Status.CHECKED_OUT;
+    public String checkoutItem(User user) {
+        if (this.isAvailable()) {
+            this.user = user;
         }
+        return "Thank you! Enjoy the " + mediaType;
     }
 
-    public void returnItem() {
-        if (this.status.equals(Status.CHECKED_OUT)) {
-            this.status = Status.AVAILABLE;
+    public void returnItem(User user) {
+        if (this.isCheckedOut()) {
+            this.user = new NullUser();
         }
     }
 }

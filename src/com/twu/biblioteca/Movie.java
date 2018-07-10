@@ -11,6 +11,7 @@ public class Movie extends Media {
         this.year = year;
         this.director = director;
         this.rating = rating;
+        this.mediaType = Media.MOVIE;
     }
 
     public String detailsString() {

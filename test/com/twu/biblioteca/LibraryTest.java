@@ -9,15 +9,37 @@ public class LibraryTest {
     @Test
     public void testCheckoutBook() {
         Library lib = new Library();
-        assertEquals(lib.checkoutItem("Call Me By Your Name"),"Thank you! Enjoy the book");
-        assertEquals(lib.checkoutItem("Call Me By Your Name"),"That book is not available.");
+        User user = new User(1234567);
+        assertEquals(lib.checkoutItem("Call Me By Your Name",user),Response.validCheckout(Media.BOOK));
+        assertEquals(lib.getUserOfItem("Call Me By Your Name"),user);
+        assertEquals(lib.checkoutItem("Call Me By Your Name", user),Response.invalidCheckout(Media.BOOK));
     }
 
     @Test
     public void testReturnBook() {
         Library lib = new Library();
-        lib.checkoutItem("Call Me By Your Name");
-        assertEquals(lib.returnItem("Call Me By Your Name"),"Thank you for returning the book.");
-        assertEquals(lib.returnItem("The Bell Jar"),"That is not a valid book to return.");
+        User user = new User(1234567);
+        lib.checkoutItem("Call Me By Your Name", user);
+        assertEquals(lib.returnItem("Call Me By Your Name", user),Response.validReturn(Media.BOOK));
+        assertEquals(lib.returnItem("The Bell Jar", user),Response.invalidReturn(Media.BOOK));
+    }
+
+    @Test
+    public void testCheckoutMovie() {
+        Library lib = new Library();
+        User user = new User(1234567);
+        assertEquals(lib.checkoutItem("Cars", user),Response.validCheckout(Media.MOVIE));
+    }
+
+    @Test
+    public void testTwoUsers() {
+        Library lib = new Library();
+        User user1 = new User(1234567);
+        User user2 = new User(2345678);
+        lib.checkoutItem("Call Me By Your Name",user1);
+        assertEquals(lib.returnItem("Call Me By Your Name",user2),Response.invalidReturn(Media.BOOK));
+        assertEquals(lib.checkoutItem("Call Me By Your Name",user2),Response.invalidCheckout(Media.BOOK));
+        assertEquals(lib.returnItem("Call Me By Your Name",user1),Response.validReturn(Media.BOOK));
+        assertEquals(lib.checkoutItem("Call Me By Your Name",user2),Response.validCheckout(Media.BOOK));
     }
 }
