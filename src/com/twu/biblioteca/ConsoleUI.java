@@ -21,7 +21,7 @@ public class ConsoleUI {
 
         switch (userInput) {
             case "List Books":
-                return lib.listBooks();
+                return lib.mediaList();
 
             case "Return Book":
                 System.out.println("What is the name of the book you would like to return?");
@@ -56,5 +56,30 @@ public class ConsoleUI {
 
     public void respond(String userInput, Library lib, User user) {
         System.out.println(this.response(userInput,lib,user));
+    }
+
+    //Todo: check password
+    //Todo: user credentials
+    public User userCredentials() {
+        Scanner scanner = new Scanner(System.in);
+        boolean waitingForLibraryCard = true;
+        String libraryCard;
+        while(true) {
+            System.out.println("Please enter your Library Card number in the format \"XXX-XXXX\"");
+            libraryCard = scanner.nextLine();
+            if(libraryCard.matches("[\\d]{3}-[\\d]{4}")) {
+                break;
+            }
+            System.out.println("Invalid Library Card");
+        }
+
+        System.out.println("Please enter your password.");
+        String password = scanner.nextLine();
+        return new User(Integer.parseInt(libraryCard.substring(0,3) + libraryCard.substring(4,8)));
+    }
+
+    public static void main(String args[]) {
+        ConsoleUI ui = new ConsoleUI();
+        ui.userCredentials();
     }
 }

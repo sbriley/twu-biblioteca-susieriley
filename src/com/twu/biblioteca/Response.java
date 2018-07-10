@@ -1,6 +1,8 @@
 package com.twu.biblioteca;
 
 public class Response {
+    public static String INVALID_MENU_OPTION = "Select a valid option!";
+
     public static String validReturn(String mediaType) {
         return "Thank you for returning the " + mediaType + ".";
     }
@@ -16,4 +18,5 @@ public class Response {
     public static String invalidCheckout(String mediaType) {
         return "That "+ mediaType + " is not available.";
     }
+
 }

@@ -10,7 +10,7 @@ public class BibliotecaApp {
     public BibliotecaApp() {
         this.ui = new ConsoleUI();
         this.lib = new Library();
-        this.user = new User(1234567);
+        this.user = new NullUser();
     }
 
     public static void main(String[] args) {
@@ -18,19 +18,26 @@ public class BibliotecaApp {
         app.runApplication();
     }
 
-    // I don't know how to test this!!!
-    public void runApplication() {
-        Scanner scanner = new Scanner(System.in);
-        ui.displayStartupMessage();
-
-        while(true) {
-            String userInput = scanner.next();
-            if (userInput.equals("Quit")) {
-                break;
-            } else {
-                this.ui.respond(userInput,this.lib,this.user);
-            }
-        }
+    private void runApplication() {
+        Session session = new Session();
+        session.launch();
 
     }
+
+    // I don't know how to test this!!!
+//    public void runApplication() {
+//        Scanner scanner = new Scanner(System.in);
+//        ui.displayStartupMessage();
+//
+//        while(true) {
+//            String userInput = scanner.next();
+//            if (userInput.equals("Quit")) {
+//                break;
+//            } else {
+//                this.ui.respond(userInput,this.lib,this.user);
+//            }
+//        }
+//
+//    }
+
 }

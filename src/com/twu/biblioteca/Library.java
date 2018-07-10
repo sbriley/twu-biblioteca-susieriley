@@ -17,7 +17,7 @@ public class Library {
         this.items = items;
     }
 
-    public String listBooks() {
+    public String mediaList() {
         String s = "";
         for (Media item : items) {
             if(item.isAvailable()) {

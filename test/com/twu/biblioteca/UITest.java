@@ -20,7 +20,7 @@ public class UITest {
 
 
         // these tests are problematic to me, because if i add another book then the test will fail. But if I generalize the right side of the test, then I'll have duplicated code
-        assertEquals(lib.listBooks(), "Call Me By Your Name\n" +
+        assertEquals(lib.mediaList(), "Call Me By Your Name\n" +
                 "  by Andre Aciman\n" +
                 "  published 2007\n" +
                 "A Tale for the Time Being\n" +
@@ -34,7 +34,7 @@ public class UITest {
         Library lib = new Library();
         User user = new User(1234567);
         String response = ui.response("List Books",lib,user);
-        assertEquals(ConsoleUI.println(response,TEST),lib.listBooks());
+        assertEquals(ConsoleUI.println(response,TEST),lib.mediaList());
     }
 
     // is this test useful? it basically repeats the code in ui.menuOptions() - but how else do you test things
@@ -64,10 +64,10 @@ public class UITest {
         Library lib = new Library(new Book[]{
                 new Book("Call Me By Your Name", "Andre Aciman", 2007),
                 new Book("A Tale for the Time Being","Ruth Ozeki",2013)});
-        assertEquals(lib.listBooks(),new Book("Call Me By Your Name", "Andre Aciman", 2007).detailsString() +
+        assertEquals(lib.mediaList(),new Book("Call Me By Your Name", "Andre Aciman", 2007).detailsString() +
                 "\n" + new Book("A Tale for the Time Being","Ruth Ozeki",2013).detailsString() + "\n");
         lib.checkoutItem("Call Me By Your Name", user);
-        assertEquals(lib.listBooks(),new Book("A Tale for the Time Being","Ruth Ozeki",2013).detailsString() + "\n");
+        assertEquals(lib.mediaList(),new Book("A Tale for the Time Being","Ruth Ozeki",2013).detailsString() + "\n");
     }
 
 }
